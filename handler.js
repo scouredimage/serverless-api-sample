@@ -12,10 +12,6 @@
 const app = require('lambda-api')({ version: 'v1.0', base: 'v1' })
 
 
-//----------------------------------------------------------------------------//
-// Define Middleware
-//----------------------------------------------------------------------------//
-
   // Add CORS Middleware
   app.use((req,res,next) => {
 
@@ -26,23 +22,6 @@ const app = require('lambda-api')({ version: 'v1.0', base: 'v1' })
     next()
   })
 
-
-  // Add Authorization Middleware
-  app.use((req,res,next) => {
-
-    // Check for Authorization Bearer token
-    if (req.auth.type === 'Bearer') {
-      // Get the Bearer token value
-      let token = req.auth.value
-      // Set the token in the request scope
-      req.token = token
-      // Do some checking here to make sure it is valid (set an auth flag)
-      req.auth = true
-    }
-
-    // Call next to continue processing
-    next()
-  })
 
 //----------------------------------------------------------------------------//
 // Build API routes
